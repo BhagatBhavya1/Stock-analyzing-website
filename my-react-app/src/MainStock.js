@@ -12,10 +12,12 @@ import IconButton from '@mui/material/IconButton';
 import ExcelTable from './ExcelTable';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
+import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io';
 import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
-import "./style.css";
+import "./MainStock.css";
+
 import AddStock from "./AddStock";
 
 const Home_Page = () => {
@@ -25,7 +27,7 @@ const Home_Page = () => {
   const [name, setName] = useState("");
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
-  const[isStocksWhite,setIsStocksWhite] = useState(false);
+  const[isStocksWhite,setIsStocksWhite] = useState(true);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -68,6 +70,22 @@ const Home_Page = () => {
       <div className="div">
        
         <div className="frame">
+        <div className="allstocks">
+                    <div className="stockinfo" >
+            <p className="in-boxinfo">reliance industry</p>
+                    <IoMdTrendingUp className="stock-icon" />
+                    <p className="rise1">15.2%</p>
+
+        </div>
+                <div className="stockinfo2" >
+            <p className="in-boxinfo">hdfc bank</p>
+                    <IoMdTrendingDown className="stock-icon2" />
+                    <p className="rise2">3.21%</p>
+
+        </div>
+
+        </div>
+
   {/* <div class="content">
     {/* <h1>
       {/* Your heading content */}
@@ -144,29 +162,8 @@ const Home_Page = () => {
             </div>
           </div>
         </div>
-        <div className="StatsContainer">
-            <StatsCard  title="Users" value="1000" />
-            <StatsCard title="new user" value="125" />
-            <StatsCard title="Growth" value="10%" />
-            <StatsCard title=""/>
-
-          </div>
-  <div class="datepickers-row">
-    <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker className="datepicker" label='start-date' value={value} onChange={(newValue) => setValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
-    </div>
-    <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker className="datepicker2" label='end-date' value={value} onChange={(newValue) => setValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
-    </div>
-  </div>
+        
+ 
   
 </div>
  

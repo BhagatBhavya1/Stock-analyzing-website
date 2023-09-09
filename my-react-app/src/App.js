@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import './App.css';
 import Home_Page from "./Home_Page";
-
+import MainStock from "./MainStock";
  const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +31,7 @@ import Home_Page from "./Home_Page";
   return (
     <div className="App">
       {loggedIn ? (
-        <Home_Page />
+        <MainStock />
       ) : (
     
     <div className="box">

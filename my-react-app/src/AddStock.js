@@ -11,22 +11,29 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import IconButton from '@mui/material/IconButton';
 import ExcelTable from './ExcelTable';
 import AddIcon from '@mui/icons-material/Add';
+import { styled } from '@mui/material/styles';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import PersonIcon from '@mui/icons-material/Person';
 import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
-import "./style.css";
-import AddStock from "./AddStock";
+import MainStock from "./MainStock";
+import "./AddStock.css";
 
-const Home_Page = () => {
-  const [value, setValue] = React.useState(null);
-  // const navigate = useNavigate();
+
+const AddStock = () => {
+//   const [value, setValue] = React.useState(null);
+//   const navigate = useNavigate();
  
   const [name, setName] = useState("");
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
   const[isStocksWhite,setIsStocksWhite] = useState(false);
-  const [isAddStockWhite, setIsAddStockWhite] = useState(false);
+  const [isAddStockWhite, setIsAddStockWhite] = useState(true);
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
     console.log('Profile icon clicked!');
@@ -55,25 +62,32 @@ const Home_Page = () => {
     setIsFNOWhite(false);
     setIsNiftyWhite(false);
     setIsStocksWhite(false);
-
-  
-   
+    
 
   };
   return (
     <div className="home-page-nifty">
-    {isAddStockWhite ? (
-        <AddStock />
+        {isStocksWhite ? (
+        <MainStock />
       ) : (
       <div className="div">
        
         <div className="frame">
+       <div class="stockToggleWrapper">
+  <p class="stockName">Name of Stock</p>
+  <div class="toggleWrapper">
+    <input type="checkbox" name="toggle2" class="mobileToggle" id="toggle2"/>
+    <label for="toggle2"></label>
+  </div>
+</div>
+
   {/* <div class="content">
     {/* <h1>
       {/* Your heading content */}
     {/* </h1> */}
     {/* <ExcelTable /> } */}
   {/* </div> */} 
+
      <div className="desktop-vertical">
           <div className="logo-container">
             <div className="logo">
@@ -144,29 +158,8 @@ const Home_Page = () => {
             </div>
           </div>
         </div>
-        <div className="StatsContainer">
-            <StatsCard  title="Users" value="1000" />
-            <StatsCard title="new user" value="125" />
-            <StatsCard title="Growth" value="10%" />
-            <StatsCard title=""/>
+       
 
-          </div>
-  <div class="datepickers-row">
-    <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker className="datepicker" label='start-date' value={value} onChange={(newValue) => setValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
-    </div>
-    <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DemoContainer components={['DatePicker']}>
-          <DatePicker className="datepicker2" label='end-date' value={value} onChange={(newValue) => setValue(newValue)} />
-        </DemoContainer>
-      </LocalizationProvider>
-    </div>
-  </div>
   
 </div>
  
@@ -182,4 +175,4 @@ const Home_Page = () => {
   );
 };
 
-export default Home_Page;
+export default AddStock;
