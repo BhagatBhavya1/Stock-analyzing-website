@@ -16,13 +16,13 @@ import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io';
 import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
-import "./MainStock.css";
-import StockDetailInfo from "./StockDetailInfo"
+import "./StockDetailInfo.css";
+// import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 import AddStock from "./AddStock";
+import StockTable from "./StockTable";
 
-
-const MainStock = ({}) => {
+const StockDetailInfo = ({stockName}) => {
   const [value, setValue] = React.useState(null);
   // const navigate = useNavigate();
  
@@ -62,15 +62,9 @@ const MainStock = ({}) => {
     setIsNiftyWhite(false);
     setIsStocksWhite(false);
     // navigate('/AddStock');
-    
-      
-
 
   };
-   const handleStockInfoClick = (stockName) => {
-    // Set the selectedStock state to the clicked stock name
-    setSelectedStock(stockName);
-  };
+   
   return (
    <div className="home-page-nifty">
       
@@ -79,24 +73,21 @@ const MainStock = ({}) => {
       ) : (
         <div className="div">
           <div className="frame">
-            <div className="allstocks">
-              <div className="stockinfo">
-                {/* Attach an onClick handler to open the StockDetailInfo page */}
-                <p className="in-boxinfo" onClick={() => handleStockInfoClick("Reliance Industry")}>
-                  Reliance Industry
-                </p>
-                <IoMdTrendingUp className="stock-icon" />
-                <p className="rise1">15.2%</p>
-              </div>
-              <div className="stockinfo2">
-                {/* Attach an onClick handler to open the StockDetailInfo page */}
-                <p className="in-boxinfo" onClick={() => handleStockInfoClick("HDFC Bank")}>
-                  HDFC Bank
-                </p>
-                <IoMdTrendingDown className="stock-icon2" />
-                <p className="rise2">3.21%</p>
+          <h1 className="stock-name-header">{stockName}</h1>
+                      <div className="candlestick-chart-container">
+              {/* Placeholder for your candlestick chart */}
+              <div className="candlestick-chart-placeholder">
+              
+                
               </div>
             </div>
+            <div className="table-container">
+              {/* Include the StockTable component here */}
+              <StockTable />
+            </div>
+
+
+            
 
   {/* <div class="content">
     {/* <h1>
@@ -198,4 +189,4 @@ const MainStock = ({}) => {
   );
 };
 
-export default MainStock;
+export default StockDetailInfo;

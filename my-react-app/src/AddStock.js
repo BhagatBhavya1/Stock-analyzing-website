@@ -4,25 +4,21 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Home from '@mui/icons-material/Home'
 // import XLSX from 'xlsx';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import DataTable from "./DataTable";
 import IconButton from '@mui/material/IconButton';
-import ExcelTable from './ExcelTable';
+
 import AddIcon from '@mui/icons-material/Add';
-import { styled } from '@mui/material/styles';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+
 import PersonIcon from '@mui/icons-material/Person';
-import StatsCard from "./StatsCard";
+import Switch from '@mui/material/Switch';
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
 import MainStock from "./MainStock";
+
+import ToggleButton from "./Toggle";
 import "./AddStock.css";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddStock = () => {
@@ -30,7 +26,29 @@ const AddStock = () => {
 //   const navigate = useNavigate();
  
   const [name, setName] = useState("");
+  
+  const [searchQuery, setSearchQuery] = useState(""); // State to store the search query
+
+  // Update the search query based on user input
+  const handleSearchInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+  };
+
+
+   const data = [
+    { id: 1, col1: "Row 1", col2: "Data A", col3: "Value X" },
+    { id: 2, col1: "Row 2", col2: "Data B", col3: "Value Y" },
+    { id: 3, col1: "Row 3", col2: "Data C", col3: "Value Z" },
+    // Add more data rows as needed
+  ];
+     
+
+  // Set the desired number of rows to display
+  const count = 5;
+
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
+  
   const [isFNOWhite, setIsFNOWhite] = useState(false);
   const[isStocksWhite,setIsStocksWhite] = useState(false);
   const [isAddStockWhite, setIsAddStockWhite] = useState(true);
@@ -43,6 +61,7 @@ const AddStock = () => {
     setIsFNOWhite(false);
     setIsStocksWhite(true);
     setIsAddStockWhite(false);
+    
   }
  const handleNiftyClick = () => {
     setIsNiftyWhite(true);
@@ -66,22 +85,33 @@ const AddStock = () => {
 
   };
   return (
+    <Router>
     <div className="home-page-nifty">
         {isStocksWhite ? (
         <MainStock />
       ) : (
       <div className="div">
-       
         <div className="frame">
-       <div class="stockToggleWrapper">
-  <p class="stockName">Name of Stock</p>
-  <div class="toggleWrapper">
-    <input type="checkbox" name="toggle2" class="mobileToggle" id="toggle2"/>
-    <label for="toggle2"></label>
-  </div>
-</div>
 
-  {/* <div class="content">
+        <div className="search-container">
+            <div className="search-box">
+              <input
+                id="input-with-sx"
+                type="text"
+                placeholder="Search the stock you want to add"
+                value={searchQuery} // Bind the input value to the searchQuery state
+                onChange={handleSearchInputChange} // Handle input changes
+              />
+            </div>
+            <DataTable data={data} count={5} searchQuery={searchQuery} /> {/* Pass searchQuery as a prop */}
+          </div>
+          
+          
+ 
+
+
+  {/* <div class="
+  content">
     {/* <h1>
       {/* Your heading content */}
     {/* </h1> */}
@@ -155,12 +185,11 @@ const AddStock = () => {
             >
               Add Stock
       </Button>
+      
+
             </div>
           </div>
         </div>
-       
-
-  
 </div>
  
         <div className="rectangle">
@@ -172,6 +201,10 @@ const AddStock = () => {
       </div>
       )}
     </div>
+    <Routes>
+      <Route path="/main-stock" element={<MainStock />} />
+    </Routes>
+    </Router>
   );
 };
 
