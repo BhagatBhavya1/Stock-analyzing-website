@@ -1,52 +1,57 @@
 import React, { useState, useEffect } from "react"; // Import useState and useEffect
 import ToggleButton from "./Toggle";
 import "./DataTable.css";
+import axios from 'axios';
 
-const DataTable = ({ data, count, searchQuery }) => {
+const DataTable = ({searchQuery }) => {
   // Use the count prop to limit the number of rows displayed
-  const limitedData = data.slice(0, count);
-
   // State to store the filtered data
   const [filteredData, setFilteredData] = useState([]);
+  const [stockData , setstockData] = useState([]);
 
+  useEffect(() => {
+    // Make an Axios GET request to your Express.js API endpoint
+    axios.get('http://127.0.0.1:5000/Stock_status_data') // Replace with your API endpoint
+      .then((response) => {
+        console.log("call");
+        setstockData(response.data);
+        setFilteredData(stockData);
+        filterData();
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+      
+  }, [searchQuery]);
+  
   // Function to filter the data based on the search query
   const filterData = () => {
-    if (!searchQuery) {
-      // If the search query is empty, show all data
-      setFilteredData(limitedData);
-    } else {
+    if (searchQuery) {
       // Filter data based on the search query
-      const filtered = limitedData.filter((row) =>
-        row.col1.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        row.col2.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        row.col3.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = stockData.filter((row) =>
+        row.stock_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
   };
 
-  // Update the filtered data whenever the search query changes
-  useEffect(() => {
-    filterData();
-  }, [searchQuery]);
 
   return (
     <div className="data-table">
       <table>
         <thead>
           <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-            <th>Column 3</th>
+            <th>Stock Name</th>
+            <th>Status</th>
             <th>Toggle</th>
           </tr>
         </thead>
         <tbody>
           {filteredData.map((row) => (
             <tr key={row.id}>
-              <td>{row.col1}</td>
-              <td>{row.col2}</td>
-              <td>{row.col3}</td>
+              <td>{row.stock_name}</td>
+              <td>{row.status}</td>
               <td>
                 <ToggleButton initialState={false} />
               </td>

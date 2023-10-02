@@ -99,7 +99,7 @@ const AddStock = () => {
                     onChange={handleSearchInputChange} // Handle input changes
                   />
                 </div>
-                <DataTable data={data} count={5} searchQuery={searchQuery} /> {/* Pass searchQuery as a prop */}
+                <DataTable searchQuery={searchQuery} /> {/* Pass searchQuery as a prop */}
               </div>
               
 
