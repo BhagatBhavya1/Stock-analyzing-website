@@ -138,11 +138,11 @@ const AddStock = () => {
                 /> 
                 <div>
                 <Button
-            className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
-            variant="outlined"
-            startIcon={<Home />}
-            onClick={handleStockClick}
-          >
+                className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
+                variant="outlined"
+                startIcon={<Home />}
+                onClick={handleStockClick}
+              >
             Stocks
           </Button>
 
@@ -170,7 +170,8 @@ const AddStock = () => {
                 >
                   Add Stock
           </Button>
-          
+          {isStocksWhite && <Navigate to="/Mainstock" />}
+          {/* {isNiftyWhite && <Navigate to="/Mainstock" />} */}
 
                 </div>
               </div>
@@ -184,9 +185,6 @@ const AddStock = () => {
               </div>
             </div>
           </div>
-      <Routes>
-      <Route path="/main-stock" element={<MainStock />} />
-    </Routes>
     </div>
   );
 };
