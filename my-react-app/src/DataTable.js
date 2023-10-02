@@ -32,8 +32,8 @@ const DataTable =  ({data , searchQuery }) => {
         console.log("filter",data);
       } else {
       // Filter data based on the search query
-      const filtered = data.filter((row) =>
-        row.stock_name.toLowerCase().includes(searchQuery.toLowerCase())
+        const filtered = data.filter((row) =>
+          row.stock_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
@@ -43,6 +43,25 @@ const DataTable =  ({data , searchQuery }) => {
       filterData();
     }, [searchQuery]);
 
+    const handleToggleChange = (id, newState) => {
+      // Update the UI immediately
+      console.log("bhavya");
+      const updatedData = data.map((row) =>
+        row._id === id ? { ...row, status: newState ? 'Active' : 'Inactive', } : row
+      );
+      setFilteredData(updatedData);
+  
+      // Send a PUT request to update the state in the backend
+      axios.put(`http://127.0.0.1:5000/api/update_stock_state/${id}`, {
+        newState: newState ? 'Active' : 'Inactive',
+      })
+      .then((response) => {
+        // Handle the response if needed
+      })
+      .catch((error) => {
+        console.error('Error updating stock state:', error);
+      });
+    };
   return (
     <div className="data-table">
       <table>
@@ -59,7 +78,7 @@ const DataTable =  ({data , searchQuery }) => {
               <td>{row.stock_name}</td>
               <td>{row.status}</td>
               <td>
-                <ToggleButton initialState={false} />
+              <ToggleButton initialState={row.status === 'Active'} onChange={(newState) => handleToggleChange(row._id, newState)} />
               </td>
             </tr>
           ))}

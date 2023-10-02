@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
 
-const ToggleButton = ({ initialState }) => {
+const ToggleButton = ({ initialState , onChange}) => {
   const [toggleState, setToggleState] = useState(initialState);
 
   const handleToggleChange = () => {
-    setToggleState(!toggleState);
+    const newState = !toggleState;
+    setToggleState(newState);
+    if (onChange) {
+      onChange(newState);
+    }
   };
 
   return (
