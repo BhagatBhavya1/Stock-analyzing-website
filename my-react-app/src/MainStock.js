@@ -73,10 +73,6 @@ const MainStock = ({}) => {
   };
   return (
    <div className="home-page-nifty">
-      <Routes>
-          {/* Define your routes outside of the click handler */}
-          <Route path="/AddStock/*" element={<AddStock />} />
-      </Routes>
       {selectedStock ? (
         <StockDetailInfo stockName={selectedStock} />
       ) : (
@@ -89,7 +85,7 @@ const MainStock = ({}) => {
                   Reliance Industry
                 </p>
                 <IoMdTrendingUp className="stock-icon" />
-                <p className="rise1">15.2%</p>
+                <p className="rise1">15.42%</p>
               </div>
               <div className="stockinfo2">
                 {/* Attach an onClick handler to open the StockDetailInfo page */}
