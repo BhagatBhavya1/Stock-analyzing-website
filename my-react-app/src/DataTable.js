@@ -3,39 +3,45 @@ import ToggleButton from "./Toggle";
 import "./DataTable.css";
 import axios from 'axios';
 
-const DataTable = ({searchQuery }) => {
+const DataTable =  ({data , searchQuery }) => {
   // Use the count prop to limit the number of rows displayed
   // State to store the filtered data
   const [filteredData, setFilteredData] = useState([]);
-  const [stockData , setstockData] = useState([]);
-
-  useEffect(() => {
-    // Make an Axios GET request to your Express.js API endpoint
-    axios.get('http://127.0.0.1:5000/Stock_status_data') // Replace with your API endpoint
-      .then((response) => {
-        console.log("call");
-        setstockData(response.data);
-        setFilteredData(stockData);
-        filterData();
-        // setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+  // const [stockData , setstockData] = useState([]);
+  // useEffect(() => {
+  //   // Make an Axios GET request to your Express.js API endpoint
+  //   axios.get('http://127.0.0.1:5000/Stock_status_data') // Replace with your API endpoint
+  //     .then((response) => {
+  //       console.log("call");
+  //       setstockData(response.data);
+  //       setFilteredData(stockData);
+  //       filterData();
+  //       // setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
       
-  }, [searchQuery]);
+  // }, [searchQuery]);
   
   // Function to filter the data based on the search query
   const filterData = () => {
-    if (searchQuery) {
+      if (!searchQuery) {
+        // If the search query is empty, show all data
+        setFilteredData(data);
+        console.log("filter",data);
+      } else {
       // Filter data based on the search query
-      const filtered = stockData.filter((row) =>
+      const filtered = data.filter((row) =>
         row.stock_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(filtered);
     }
   };
-
+    // Update the filtered data whenever the search query changes
+    useEffect(() => {
+      filterData();
+    }, [searchQuery]);
 
   return (
     <div className="data-table">

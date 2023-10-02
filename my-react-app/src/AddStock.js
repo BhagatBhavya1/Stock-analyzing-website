@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import TextField from '@mui/material/TextField'; 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -6,7 +6,7 @@ import Home from '@mui/icons-material/Home'
 // import XLSX from 'xlsx';
 import DataTable from "./DataTable";
 import IconButton from '@mui/material/IconButton';
-
+import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -35,17 +35,34 @@ const AddStock = () => {
     setSearchQuery(query);
   };
 
+  const [stockData , setstockData] = useState([]);
 
-   const data = [
-    { id: 1, col1: "Row 1", col2: "Data A", col3: "Value X" },
-    { id: 2, col1: "Row 2", col2: "Data B", col3: "Value Y" },
-    { id: 3, col1: "Row 3", col2: "Data C", col3: "Value Z" },
-    // Add more data rows as needed
-  ];
+  useEffect(() => {
+    // Make an Axios GET request to your Express.js API endpoint
+    axios.get('http://127.0.0.1:5000/Stock_status_data') // Replace with your API endpoint
+      .then((response) => {
+        console.log("call");
+        setstockData(response.data);
+        setSearchQuery(null);
+        console.log(response.data);
+        // setFilteredData(stockData);
+        // filterData();
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+      
+  }, []);
+
+  //  const data = [
+  //   { id: 1, col1: "Row 1", col2: "Data A", col3: "Value X" },
+  //   { id: 2, col1: "Row 2", col2: "Data B", col3: "Value Y" },
+  //   { id: 3, col1: "Row 3", col2: "Data C", col3: "Value Z" },
+  //   // Add more data rows as needed
+  // ];
      
 
-  // Set the desired number of rows to display
-  const count = 5;
 
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   
@@ -99,7 +116,7 @@ const AddStock = () => {
                     onChange={handleSearchInputChange} // Handle input changes
                   />
                 </div>
-                <DataTable searchQuery={searchQuery} /> {/* Pass searchQuery as a prop */}
+                <DataTable data={stockData} searchQuery={searchQuery} /> {/* Pass searchQuery as a prop */}
               </div>
               
 
