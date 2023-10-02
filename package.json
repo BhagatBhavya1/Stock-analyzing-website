@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@grapecity/spread-sheets-react": "^16.1.4",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.16.0"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",

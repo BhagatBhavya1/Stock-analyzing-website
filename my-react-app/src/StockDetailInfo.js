@@ -162,12 +162,10 @@ const StockDetailInfo = ({stockName}) => {
             >
               Add Stock
       </Button>
-      <Router>
         <Routes>
           {/* Define your routes outside of the click handler */}
           <Route path="/AddStock" element={<AddStock />} />
         </Routes>
-      </Router>
       {isAddStockWhite && <Navigate to="/AddStock" />}
             </div>
           </div>

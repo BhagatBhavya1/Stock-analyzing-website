@@ -19,7 +19,9 @@ import StatsCard from "./StatsCard";
 import "./MainStock.css";
 import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
+// import AddStock from "./AddStock";
 import AddStock from "./AddStock";
+
 
 
 const MainStock = ({}) => {
@@ -58,14 +60,12 @@ const MainStock = ({}) => {
   };
   const handleAddStockClick = () => {
     setIsAddStockWhite(true);
-    setIsFNOWhite(false);
-    setIsNiftyWhite(false);
-    setIsStocksWhite(false);
+    setIsFNOWhite(true);
+    setIsNiftyWhite(true);
+    setIsStocksWhite(true);
     // navigate('/AddStock');
-    
-      
-
-
+    // {<Navigate to="/AddStock" />}
+    console.log("Add Stock button clicked");
   };
    const handleStockInfoClick = (stockName) => {
     // Set the selectedStock state to the clicked stock name
@@ -73,7 +73,10 @@ const MainStock = ({}) => {
   };
   return (
    <div className="home-page-nifty">
-      
+      <Routes>
+          {/* Define your routes outside of the click handler */}
+          <Route path="/AddStock/*" element={<AddStock />} />
+      </Routes>
       {selectedStock ? (
         <StockDetailInfo stockName={selectedStock} />
       ) : (
@@ -91,25 +94,18 @@ const MainStock = ({}) => {
               <div className="stockinfo2">
                 {/* Attach an onClick handler to open the StockDetailInfo page */}
                 <p className="in-boxinfo" onClick={() => handleStockInfoClick("HDFC Bank")}>
-                  HDFC Bank
+                  Bhavya Bank
                 </p>
                 <IoMdTrendingDown className="stock-icon2" />
                 <p className="rise2">3.21%</p>
               </div>
             </div>
-
-  {/* <div class="content">
-    {/* <h1>
-      {/* Your heading content */}
-    {/* </h1> */}
-    {/* <ExcelTable /> } */}
-  {/* </div> */} 
      <div className="desktop-vertical">
           <div className="logo-container">
             <div className="logo">
               {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
               <div className="text">
-                <h1 className="webby-frames">Kizan Universal</h1>
+                <h1 className="webby-frames">Kaizen Universal</h1>
                 <div className="for-figma" />
               </div>
             </div>
@@ -171,12 +167,7 @@ const MainStock = ({}) => {
             >
               Add Stock
       </Button>
-      <Router>
-        <Routes>
-          {/* Define your routes outside of the click handler */}
-          <Route path="/AddStock" element={<AddStock />} />
-        </Routes>
-      </Router>
+        
       {isAddStockWhite && <Navigate to="/AddStock" />}
             </div>
           </div>
