@@ -1,42 +1,56 @@
 // ExcelTable.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import * as XLSX from 'xlsx'
+import axios from 'axios';
 
 const ExcelTable = () => {
-  const [tableData, setTableData] = useState([]);
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const data = new Uint8Array(event.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const firstSheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[firstSheetName];
-      const dataFromSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-      setTableData(dataFromSheet);
-    };
-
-    reader.readAsArrayBuffer(file);
-  };
-
+  const [stocktableData, setstocktableData] = useState([]);
+  useEffect(() => {
+    // Make an Axios GET request to your Express.js API endpoint
+    axios.get('http://127.0.0.1:5000/get_data') // Replace with your API endpoint
+      .then((response) => {
+        console.log("get_data called");
+        console.log(response.data);
+        setstocktableData(response.data)
+        // setFilteredData(stockData);
+        // filterData();
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+      
+  }, []);
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file"/>
       <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Series</th>
+            <th>High Price</th>
+            <th>Total Traded Value</th>
+            <th>52 Week High Price</th>
+            <th>52 Week Low Price</th>
+          </tr>
+        </thead>
         <tbody>
-          {tableData.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((cellData, columnIndex) => (
-                <td key={columnIndex}>{cellData}</td>
-              ))}
+          {stocktableData.map((item, index) => (
+            <tr key={index}>
+              <td>{item.Symbol}</td>
+              <td>{item.Series}</td>
+              <td>{item['High Price']}</td>
+              <td>{item['Total Traded Value']}</td>
+              <td>{item['52 Week High Price']}</td>
+              <td>{item['52 Week Low Price']}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-};
+}
+
 
 export default ExcelTable;

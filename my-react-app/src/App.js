@@ -6,6 +6,7 @@ import MainStock from "./MainStock";
 import { BrowserRouter as Router, Routes,Route, Switch, BrowserRouter } from "react-router-dom";
 import AddStock from "./AddStock";
 import Login from "./Login";
+import ExcelTable from "./ExcelTable";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/Mainstock" element={<MainStock />}/>
         <Route path="/AddStock" element={<AddStock />} />
+        <Route path="/GetStock" element={<ExcelTable />} />
       </Routes>
     </Router>
   );
