@@ -43,22 +43,23 @@ const DataTable =  ({data , searchQuery }) => {
       filterData();
     }, [searchQuery]);
 
-    const handleToggleChange = (id, newState) => {
+    const handleToggleChange = (stock_name, newState) => {
       // Update the UI immediately
       console.log("bhavya");
       const updatedData = data.map((row) =>
-        row._id === id ? { ...row, status: newState ? 'Active' : 'Inactive', } : row
+        row.stock_name === stock_name ? { ...row, status: newState ? 'Active' : 'Inactive', } : row
       );
       setFilteredData(updatedData);
   
       // Send a PUT request to update the state in the backend
-      axios.put(`http://127.0.0.1:5000/api/update_stock_state/${id}`, {
+      axios.put(`http://127.0.0.1:5000/update_stock_state/${stock_name}`, {
         newState: newState ? 'Active' : 'Inactive',
       })
       .then((response) => {
         // Handle the response if needed
       })
       .catch((error) => {
+        
         console.error('Error updating stock state:', error);
       });
     };
@@ -78,7 +79,7 @@ const DataTable =  ({data , searchQuery }) => {
               <td>{row.stock_name}</td>
               <td>{row.status}</td>
               <td>
-              <ToggleButton initialState={row.status === 'Active'} onChange={(newState) => handleToggleChange(row._id, newState)} />
+              <ToggleButton initialState={row.status === 'Active'} onChange={(newState) => handleToggleChange(row.stock_name, newState)} />
               </td>
             </tr>
           ))}

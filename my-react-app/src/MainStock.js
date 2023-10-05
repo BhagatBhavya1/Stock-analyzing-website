@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import TextField from '@mui/material/TextField'; 
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Home from '@mui/icons-material/Home'
@@ -34,6 +35,8 @@ const MainStock = ({}) => {
   const[isStocksWhite,setIsStocksWhite] = useState(true);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
   const [selectedStock, setSelectedStock] = useState(null);
+  const [stockData , setstockData] = useState([]);
+
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -71,6 +74,26 @@ const MainStock = ({}) => {
     // Set the selectedStock state to the clicked stock name
     setSelectedStock(stockName);
   };
+
+  useEffect(() => {
+    // Make an Axios GET request to your Express.js API endpoint
+    axios.get('http://127.0.0.1:5000/Stock_status_data') // Replace with your API endpoint
+      .then((response) => {
+        console.log("call");
+        setstockData(response.data);
+        // setSearchQuery(null);
+        console.log(response.data);
+        // setFilteredData(stockData);
+        // filterData();
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+      
+  }, []);
+
+  const activeRows = stockData.filter(item => item.status === 'Active');
   return (
    <div className="home-page-nifty">
       {selectedStock ? (
@@ -79,22 +102,15 @@ const MainStock = ({}) => {
         <div className="div">
           <div className="frame">
             <div className="allstocks">
-              <div className="stockinfo">
-                {/* Attach an onClick handler to open the StockDetailInfo page */}
-                <p className="in-boxinfo" onClick={() => handleStockInfoClick("Reliance Industry")}>
-                  Reliance Industry
+            {activeRows.map((stock, index) => (
+              <div className="stockinfo" key={index}>
+                <p className="in-boxinfo" onClick={() => handleStockInfoClick(stock.stock_name)}>
+                  {stock.stock_name}
                 </p>
-                <IoMdTrendingUp className="stock-icon" />
-                <p className="rise1">15.42%</p>
+                <p className="rise1">15.5%</p>
               </div>
-              <div className="stockinfo2">
-                {/* Attach an onClick handler to open the StockDetailInfo page */}
-                <p className="in-boxinfo" onClick={() => handleStockInfoClick("HDFC Bank")}>
-                  Bhavya Bank
-                </p>
-                <IoMdTrendingDown className="stock-icon2" />
-                <p className="rise2">3.21%</p>
-              </div>
+            ))}
+      
             </div>
      <div className="desktop-vertical">
           <div className="logo-container">

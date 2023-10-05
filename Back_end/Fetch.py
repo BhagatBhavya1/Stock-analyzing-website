@@ -20,5 +20,3 @@ def Stock_status_data():
     # print(json_data)
     return json_data
     # return jsonify(results)
-
-# Stock_status_data()
