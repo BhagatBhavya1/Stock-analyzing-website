@@ -75,7 +75,7 @@ const MainStock = ({}) => {
     // Set the selectedStock state to the clicked stock name
     console.log(stockName);
     setSelectedStock(stockName);
-    navigate('/StockDetailInfo');
+    navigate('/StockDetailInfo/'+stockName);
   };
 
   useEffect(() => {

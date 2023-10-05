@@ -1,50 +1,51 @@
-// StockTable.js
-import React from "react";
+import React, { useState ,useEffect} from "react";
+import axios from 'axios';
 import "./StockTable.css";
 const StockTable = () => {
-  // Define your table content here
-  const tableData = [
-    // Example data
-    {
-      column1: "Data 1",
-      column2: "Data 2",
-      column3: "Data 3",
-      column4: "Data 4",
-      column5: "Data 5",
-      column6: "Data 6",
-      column7: "Data 7",
-    },
-    // Add more rows as needed
-  ];
-
+  const [stocktableData, setstocktableData] = useState([]);
+  useEffect(() => {
+    // Make an Axios GET request to your Express.js API endpoint
+    axios.get('http://127.0.0.1:5000/get_data') // Replace with your API endpoint
+      .then((response) => {
+        console.log("get_data called");
+        console.log(response.data);
+        setstocktableData(response.data)
+        // setFilteredData(stockData);
+        // filterData();
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+      
+  }, []);
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th className="header-column">Column 1</th>
-          <th className="header-column">Column 2</th>
-          <th className="header-column">Column 3</th>
-          <th className="header-column">Column 4</th>
-          <th className="header-column">Column 5</th>
-          <th className="header-column">Column 6</th>
-          <th className="header-column">Column 7</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tableData.map((row, index) => (
-          <tr key={index}>
-            <td>{row.column1}</td>
-            <td>{row.column2}</td>
-            <td>{row.column3}</td>
-            <td>{row.column4}</td>
-            <td>{row.column5}</td>
-            <td>{row.column6}</td>
-            <td>{row.column7}</td>
-            
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Series</th>
+            <th>High Price</th>
+            <th>Total Traded Value</th>
+            <th>52 Week High Price</th>
+            <th>52 Week Low Price</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {stocktableData.map((item, index) => (
+            <tr key={index}>
+              <td>{item.Symbol}</td>
+              <td>{item.Series}</td>
+              <td>{item['High Price']}</td>
+              <td>{item['Total Traded Value']}</td>
+              <td>{item['52 Week High Price']}</td>
+              <td>{item['52 Week Low Price']}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

@@ -25,7 +25,7 @@ def parse_date(text):
 
 Stock_get = Blueprint('get_data', __name__)
 @Stock_get.route('/get_data', methods=['GET'])
-def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2020', end_date='1-10-2020v'):
+def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2020', end_date='1-10-2020'):
     stock_symbol = stock_symbol.replace('&', '%26')
 
     if full_data is True:

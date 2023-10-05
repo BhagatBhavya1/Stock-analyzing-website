@@ -18,20 +18,19 @@ import StatsCard from "./StatsCard";
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
 import "./StockDetailInfo.css";
 // import StockDetailInfo from "./StockDetailInfo"
-import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
+import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 import AddStock from "./AddStock";
 import StockTable from "./StockTable";
 
-const StockDetailInfo = ({stockName}) => {
+const StockDetailInfo = () => {
   const [value, setValue] = React.useState(null);
   // const navigate = useNavigate();
- 
+  const { stock_name } = useParams();
   const [name, setName] = useState("");
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
   const[isStocksWhite,setIsStocksWhite] = useState(true);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
-  const [selectedStock, setSelectedStock] = useState(null);
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -67,22 +66,21 @@ const StockDetailInfo = ({stockName}) => {
    
   return (
    <div className="home-page-nifty">
-      
-      {selectedStock ? (
-        <StockDetailInfo stockName={selectedStock} />
-      ) : (
         <div className="div">
           <div className="frame">
-          <h1 className="stock-name-header">{stockName}</h1>
+          <h1 className="stock-name-header">{stock_name}</h1>
                       <div className="candlestick-chart-container">
               {/* Placeholder for your candlestick chart */}
               <div className="candlestick-chart-placeholder">
-              
-                
               </div>
+            </div>
+            <div>
+              {/* <p>Bhavay</p> */}
+            <candel_Chart/>
             </div>
             <div className="table-container">
               {/* Include the StockTable component here */}
+              
               <StockTable />
             </div>
 
@@ -182,7 +180,6 @@ const StockDetailInfo = ({stockName}) => {
           </div>
         </div>
       </div>
-      )}
     </div>
   );
 };

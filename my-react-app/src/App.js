@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/Mainstock" element={<MainStock />}/>
         <Route path="/AddStock" element={<AddStock />} />
         <Route path="/GetStock" element={<ExcelTable />} />
-        <Route path="/StockDetailInfo" element={<StockDetailInfo />} />
+        <Route path="/StockDetailInfo/:stock_name" element={<StockDetailInfo />} />
       </Routes>
     </Router>
   );
