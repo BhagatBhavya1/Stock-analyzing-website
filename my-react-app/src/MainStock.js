@@ -70,9 +70,12 @@ const MainStock = ({}) => {
     // {<Navigate to="/AddStock" />}
     console.log("Add Stock button clicked");
   };
+  const navigate = useNavigate();
    const handleStockInfoClick = (stockName) => {
     // Set the selectedStock state to the clicked stock name
+    console.log(stockName);
     setSelectedStock(stockName);
+    navigate('/StockDetailInfo');
   };
 
   useEffect(() => {
@@ -96,15 +99,12 @@ const MainStock = ({}) => {
   const activeRows = stockData.filter(item => item.status === 'Active');
   return (
    <div className="home-page-nifty">
-      {selectedStock ? (
-        <StockDetailInfo stockName={selectedStock} />
-      ) : (
         <div className="div">
           <div className="frame">
             <div className="allstocks">
             {activeRows.map((stock, index) => (
-              <div className="stockinfo" key={index}>
-                <p className="in-boxinfo" onClick={() => handleStockInfoClick(stock.stock_name)}>
+              <div className="stockinfo" key={index} onClick={() => handleStockInfoClick(stock.stock_name)}>
+                <p className="in-boxinfo" >
                   {stock.stock_name}
                 </p>
                 <p className="rise1">15.5%</p>
@@ -196,7 +196,6 @@ const MainStock = ({}) => {
           </div>
         </div>
       </div>
-      )}
     </div>
   );
 };

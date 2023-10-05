@@ -6,6 +6,7 @@ Stock_Update = Blueprint('Stock_Update', __name__)
 @Stock_Update.route('/update_stock_state/<string:stock_name>', methods=['PUT'])
 def update_stock_state(stock_name):
     try:
+        print(stock_name)
         # Get the new state from the request JSON data
         data = request.get_json()
         new_state = data.get('newState')

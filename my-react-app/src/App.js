@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes,Route, Switch, BrowserRouter } from "re
 import AddStock from "./AddStock";
 import Login from "./Login";
 import ExcelTable from "./ExcelTable";
+import StockDetailInfo from "./StockDetailInfo";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/Mainstock" element={<MainStock />}/>
         <Route path="/AddStock" element={<AddStock />} />
         <Route path="/GetStock" element={<ExcelTable />} />
+        <Route path="/StockDetailInfo" element={<StockDetailInfo />} />
       </Routes>
     </Router>
   );
