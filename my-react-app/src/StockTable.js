@@ -5,6 +5,7 @@ import { Chart } from "react-google-charts";
 // import candel_Chart from "./Candel_chart";
 const StockTable = () => {
   const [stocktableData, setstocktableData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Make an Axios GET request to your Express.js API endpoint
     axios.get('http://127.0.0.1:5000/get_data') // Replace with your API endpoint
@@ -14,7 +15,7 @@ const StockTable = () => {
         setstocktableData(response.data)
         // setFilteredData(stockData);
         // filterData();
-        // setIsLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -50,6 +51,13 @@ const StockTable = () => {
   };
   return (
     <div>
+      {isLoading ? ( // Show loading spinner when isLoading is true
+        // <Preloader/>
+        <div className = "preloader">
+        <div className="custom-loader"></div>
+      </div>
+      ) : (
+        <div>
       <Chart
         chartType="CandlestickChart"
         width="100%"
@@ -83,6 +91,7 @@ const StockTable = () => {
           ))}
         </tbody>
       </table>
+      </div>)}
     </div>
   );
 };

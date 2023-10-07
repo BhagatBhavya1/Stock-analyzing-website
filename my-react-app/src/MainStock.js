@@ -20,10 +20,11 @@ import StatsCard from "./StatsCard";
 import "./MainStock.css";
 import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
+import './Preloader.css';
 // import AddStock from "./AddStock";
 import AddStock from "./AddStock";
 
-
+import Preloader from "./Preloader";
 
 const MainStock = ({}) => {
   const [value, setValue] = React.useState(null);
@@ -36,7 +37,7 @@ const MainStock = ({}) => {
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
   const [selectedStock, setSelectedStock] = useState(null);
   const [stockData , setstockData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -85,6 +86,7 @@ const MainStock = ({}) => {
         console.log("call");
         setstockData(response.data);
         // setSearchQuery(null);
+        setIsLoading(false); 
         console.log(response.data);
         // setFilteredData(stockData);
         // filterData();
@@ -99,6 +101,12 @@ const MainStock = ({}) => {
   const activeRows = stockData.filter(item => item.status === 'Active');
   return (
    <div className="home-page-nifty">
+    {isLoading ? ( // Show loading spinner when isLoading is true
+        // <Preloader/>
+        <div className = "preloader">
+        <div className="custom-loader"></div>
+      </div>
+      ) : (
         <div className="div">
           <div className="frame">
             <div className="allstocks">
@@ -195,7 +203,7 @@ const MainStock = ({}) => {
             <button className="Contact_us">Contact us</button>
           </div>
         </div>
-      </div>
+      </div>)}
     </div>
   );
 };

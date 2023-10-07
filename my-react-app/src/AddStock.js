@@ -28,7 +28,7 @@ const AddStock = () => {
   const [name, setName] = useState("");
   
   const [searchQuery, setSearchQuery] = useState(""); // State to store the search query
-
+  const [isLoading, setIsLoading] = useState(true);
   // Update the search query based on user input
   const handleSearchInputChange = (event) => {
     const query = event.target.value;
@@ -47,7 +47,7 @@ const AddStock = () => {
         console.log(response.data);
         // setFilteredData(stockData);
         // filterData();
-        // setIsLoading(false);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -103,6 +103,12 @@ const AddStock = () => {
   };
   return (
        <div className="home-page-nifty">
+        {isLoading ? ( // Show loading spinner when isLoading is true
+        // <Preloader/>
+        <div className = "preloader">
+        <div className="custom-loader"></div>
+      </div>
+      ) : (
           <div className="div">
             <div className="frame">
 
@@ -201,7 +207,7 @@ const AddStock = () => {
                 <button className="Contact_us">Contact us</button>
               </div>
             </div>
-          </div>
+          </div>)}
     </div>
   );
 };
