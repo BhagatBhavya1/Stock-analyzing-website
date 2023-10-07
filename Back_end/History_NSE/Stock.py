@@ -44,5 +44,7 @@ def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2020', e
             raise ValueError("Starting date is greater than end date.")
 
     result = scrape_data(start_date=parsed_start_date, end_date=parsed_end_date, input_type='stock', name=stock_symbol)
+    result['Date'] = result.index
+    # result.index.name = 'Date'
     print(result)
     return result.to_json(orient='records', date_format='iso')

@@ -1,6 +1,6 @@
 /* StockTable.css */
 .table {
-    width: 100vh;
+    width: auto;
     border-collapse: collapse;
 }
 

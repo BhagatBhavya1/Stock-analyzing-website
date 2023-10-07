@@ -69,24 +69,9 @@ const StockDetailInfo = () => {
         <div className="div">
           <div className="frame">
           <h1 className="stock-name-header">{stock_name}</h1>
-                      <div className="candlestick-chart-container">
-              {/* Placeholder for your candlestick chart */}
-              <div className="candlestick-chart-placeholder">
-              </div>
-            </div>
-            <div>
-              {/* <p>Bhavay</p> */}
-            <candel_Chart/>
-            </div>
             <div className="table-container">
-              {/* Include the StockTable component here */}
-              
               <StockTable />
-            </div>
-
-
-            
-
+          </div>
   {/* <div class="content">
     {/* <h1>
       {/* Your heading content */}

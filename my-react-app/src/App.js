@@ -8,7 +8,7 @@ import AddStock from "./AddStock";
 import Login from "./Login";
 import ExcelTable from "./ExcelTable";
 import StockDetailInfo from "./StockDetailInfo";
-
+import Candel_Chart from "./Candel_chart";
 const App = () => {
   return (
     <Router>
@@ -18,6 +18,7 @@ const App = () => {
         <Route path="/AddStock" element={<AddStock />} />
         <Route path="/GetStock" element={<ExcelTable />} />
         <Route path="/StockDetailInfo/:stock_name" element={<StockDetailInfo />} />
+        <Route path="/Candel" element={<Candel_Chart />} />
       </Routes>
     </Router>
   );
