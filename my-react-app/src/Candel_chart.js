@@ -38,12 +38,9 @@ const Candel_Chart = () => {
   };
   return (
     <div>
-      {/* <Line data={chartData} options={chartOptions} /> */}
-      {/* <Candlestick data={chartData} options={options} />
-       */}
        <Chart
       chartType="CandlestickChart"
-      width="100%"
+      width="87%"
       height="400px"
       data={dataWithHeader}
       options={options}

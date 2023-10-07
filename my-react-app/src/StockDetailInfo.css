@@ -5,11 +5,15 @@
     justify-content: center;
     width: 100%;
 }
-.table-container {
-    height: 400px;
-    width:100%; /* Set the desired fixed height */
+.Candel-chart{
+    margin-left: 20%;
+    /* margin-top: 10%; */
+}
+.table-container{
+    margin-left: 20%; /* Set the desired fixed height */
     overflow-y: auto; /* Add a vertical scrollbar when content overflows */
-  }
+    width: 80%;
+  } 
 .home-page-nifty .div {
     background-color: #ffffff;
     border: 1px none;
@@ -17,9 +21,6 @@
     position: relative;
     width: 100%;
 }
-
-
-
 .home-page-nifty .logo-container {
     align-items: center;
     align-self: stretch;

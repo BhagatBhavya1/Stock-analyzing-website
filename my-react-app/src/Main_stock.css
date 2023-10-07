@@ -277,13 +277,6 @@
     right: 0px;
 }
 
-
-.content {
-    /* flex: 1; */
-    /* Take up remaining space */
-    /* text-align: right; */
-}
-
 h1 {
     margin-bottom: 10px;
 }
@@ -303,27 +296,16 @@ h1 {
     margin-left: 300px;
 }
 .allstocks {
-    justify-content: space-evenly;
-    display: flex;
-}
-.stockinfo{
-    margin-left: 300px;
-    color: #000;
-    border: #000  ;
-    
-    position: relative;
-    width: 250px;
-    cursor: pointer;
-    border-radius: 20px ;
-    background-color: #D9D9D9;
-    box-shadow: 5px 6px 50px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-
-}
-.stockinfo2 {
-    position: relative;
-
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    top: 10%;
+    z-index: 1;
+  }
+  
+  .stockinfo {
+    /* margin-left: 10px; */
     color: #000;
     border: #000;
     width: 250px;
@@ -331,41 +313,33 @@ h1 {
     border-radius: 20px;
     background-color: #D9D9D9;
     box-shadow: 5px 6px 50px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: space-between;
-    margin-left: 50px;
-
-
-}
-.stock-icon {
+  }
+  
+  
+  /* Add styles for the overlapping icon within stockinfo */
+  .stock-icon {
     font-size: 24px;
-
-   
     display: flex;
     color: green;
-    /* justify-content: space-between; */
     align-items: end;
     margin-top: 15px;
     padding-right: 0px;
-}
-.stock-icon2 {
-    font-size: 24px;
-
-
-    display: flex;
-    color: red;
-    /* justify-content: end; */
-    margin-top: 15px;
-}
-.rise1{
+  }
+  
+  /* Add styles for the red text within stockinfo */
+  .rise1 {
     color: green;
     margin-right: 10px;
-}
-.rise2 {
+  }
+  
+  /* Add styles for the red text within stockinfo */
+  .rise2 {
     color: red;
     margin-right: 10px;
-}
-.in-boxinfo{
+  }
+  
+  /* Add styles for the text within stockinfo */
+  .in-boxinfo {
     margin-left: 10px;
-    
-}
+  }
+  

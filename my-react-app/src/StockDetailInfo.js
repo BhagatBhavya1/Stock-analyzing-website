@@ -20,6 +20,7 @@ import "./StockDetailInfo.css";
 // import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 import AddStock from "./AddStock";
+import Candel_Chart from "./Candel_chart";
 import StockTable from "./StockTable";
 
 const StockDetailInfo = () => {
@@ -69,9 +70,7 @@ const StockDetailInfo = () => {
         <div className="div">
           <div className="frame">
           <h1 className="stock-name-header">{stock_name}</h1>
-            <div className="table-container">
-              <StockTable />
-          </div>
+            
   {/* <div class="content">
     {/* <h1>
       {/* Your heading content */}
@@ -157,7 +156,12 @@ const StockDetailInfo = () => {
  
   
 </div>
- 
+<div className="Candel-chart">
+             
+             
+          </div>  
+         <div  className="table-container">
+         <Candel_Chart /><StockTable /></div>
         <div className="rectangle">
           <div className="button-container">
             <button className="About_us">About us</button>

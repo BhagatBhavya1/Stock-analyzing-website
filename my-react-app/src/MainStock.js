@@ -17,14 +17,9 @@ import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io';
 import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
-import "./MainStock.css";
-import StockDetailInfo from "./StockDetailInfo"
+import "./Main_stock.css";
 import { BrowserRouter as Router, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 import './Preloader.css';
-// import AddStock from "./AddStock";
-import AddStock from "./AddStock";
-
-import Preloader from "./Preloader";
 
 const MainStock = ({}) => {
   const [value, setValue] = React.useState(null);
@@ -109,17 +104,7 @@ const MainStock = ({}) => {
       ) : (
         <div className="div">
           <div className="frame">
-            <div className="allstocks">
-            {activeRows.map((stock, index) => (
-              <div className="stockinfo" key={index} onClick={() => handleStockInfoClick(stock.stock_name)}>
-                <p className="in-boxinfo" >
-                  {stock.stock_name}
-                </p>
-                <p className="rise1">15.5%</p>
-              </div>
-            ))}
-      
-            </div>
+            
      <div className="desktop-vertical">
           <div className="logo-container">
             <div className="logo">
@@ -196,6 +181,17 @@ const MainStock = ({}) => {
  
   
 </div>
+<div className="allstocks">
+            {activeRows.map((stock, index) => (
+              <div className="stockinfo" key={index} onClick={() => handleStockInfoClick(stock.stock_name)}>
+                <p className="in-boxinfo" >
+                  {stock.stock_name}
+                </p>
+                <p className="rise1">15.5%</p>
+              </div>
+            ))}
+      
+            </div>
  
         <div className="rectangle">
           <div className="button-container">

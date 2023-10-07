@@ -23,32 +23,6 @@ const StockTable = () => {
       
   }, []);
 
-  const extractedData = stocktableData.map((item) => [
-    // Format date to display only day and month (e.g., "23 Sept")
-    `${new Date(item.Date).getDate()} ${new Date(item.Date).toLocaleString('default', { month: 'short' })}`,
-    item['Low Price'],
-    item['Open Price'],
-    item['Close Price'],
-    item['High Price']
-  ]);
-
-  const data = [['Date', 'Low', 'Open', 'Close', 'High']];
-  const dataWithHeader = data.concat(extractedData);
-
-  const options = {
-    legend: "none",
-    bar: { groupWidth: "100%" },
-    candlestick: {
-      fallingColor: { strokeWidth: 0, fill: "#a52714" },
-      risingColor: { strokeWidth: 0, fill: "#0f9d58" },
-    },
-    hAxis: {
-      // Format the x-axis labels
-      textStyle: {
-        fontSize: 12, // Adjust the font size as needed
-      },
-    },
-  };
   return (
     <div>
       {isLoading ? ( // Show loading spinner when isLoading is true
@@ -58,13 +32,6 @@ const StockTable = () => {
       </div>
       ) : (
         <div>
-      <Chart
-        chartType="CandlestickChart"
-        width="100%"
-        height="90vh" // Set height to 90% of the viewport height
-        data={dataWithHeader}
-        options={options}
-      />
       <table>
         <thead>
           <tr>
@@ -90,7 +57,7 @@ const StockTable = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table>  
       </div>)}
     </div>
   );
