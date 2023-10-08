@@ -17,6 +17,7 @@ import MainStock from "./MainStock";
 
 import ToggleButton from "./Toggle";
 import "./AddStock.css";
+import "./Home.css";
 import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -131,7 +132,7 @@ const AddStock = () => {
                 <div className="logo">
                   {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
                   <div className="text">
-                    <h1 className="webby-frames">Kizan Universal</h1>
+                    <h1 className="webby-frames">Bizan Universal</h1>
                     <div className="for-figma" />
                   </div>
                 </div>
@@ -193,7 +194,8 @@ const AddStock = () => {
                 >
                   Add Stock
           </Button>
-          {isStocksWhite && <Navigate to="/Mainstock" />}
+          {/* {isStocksWhite && <Navigate to="/Mainstock" />} */}
+          {isFNOWhite && <Navigate to="/F_O" />}
           {/* {isNiftyWhite && <Navigate to="/Mainstock" />} */}
 
                 </div>

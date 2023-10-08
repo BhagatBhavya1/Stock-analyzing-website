@@ -35,12 +35,23 @@ const Candel_Chart = () => {
       fallingColor: { strokeWidth: 0, fill: "#a52714" }, // red
       risingColor: { strokeWidth: 0, fill: "#0f9d58" }, // green
     },
+    backgroundColor: 'transparent',
+    vAxis: {
+      textStyle: {
+        color: 'white', // Set the font color for the vertical axis text to white
+      },
+    },
+    hAxis: {
+      textStyle: {
+        color: 'white', // Set the font color for the horizontal axis text to white
+      },
+    },
   };
   return (
     <div>
        <Chart
       chartType="CandlestickChart"
-      width="87%"
+      width="80%"
       height="400px"
       data={dataWithHeader}
       options={options}

@@ -17,11 +17,13 @@ import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
 import "./StockDetailInfo.css";
+import "./style.css";
 // import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 import AddStock from "./AddStock";
 import Candel_Chart from "./Candel_chart";
 import StockTable from "./StockTable";
+
 
 const StockDetailInfo = () => {
   const [value, setValue] = React.useState(null);
@@ -68,21 +70,32 @@ const StockDetailInfo = () => {
   return (
    <div className="home-page-nifty">
         <div className="div">
-          <div className="frame">
-          <h1 className="stock-name-header">{stock_name}</h1>
+        <div className="frame">
+        <div className="Main_content">
+          <div className="Title_detail">
+            <h3>{stock_name}</h3>
+          </div>
+          <div className="scrollable-table">
+          <div className="Candel-chart">
+              {/* Place your candlestick chart component here */}
+              <Candel_Chart />
+          </div>
+
+          <div className="table-container">
+            {/* Place your table component here */}
             
-  {/* <div class="content">
-    {/* <h1>
-      {/* Your heading content */}
-    {/* </h1> */}
-    {/* <ExcelTable /> } */}
-  {/* </div> */} 
+              <StockTable />
+            </div>
+          </div>
+        </div>
+       
+    
      <div className="desktop-vertical">
           <div className="logo-container">
             <div className="logo">
               {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
               <div className="text">
-                <h1 className="webby-frames">Kizan Universal</h1>
+                <h1 className="webby-frames">Kaizan Universal</h1>
                 <div className="for-figma" />
               </div>
             </div>
@@ -144,24 +157,12 @@ const StockDetailInfo = () => {
             >
               Add Stock
       </Button>
-        <Routes>
-          {/* Define your routes outside of the click handler */}
-          <Route path="/AddStock" element={<AddStock />} />
-        </Routes>
       {isAddStockWhite && <Navigate to="/AddStock" />}
             </div>
           </div>
         </div>
+        </div>
         
- 
-  
-</div>
-<div className="Candel-chart">
-             
-             
-          </div>  
-         <div  className="table-container">
-         <Candel_Chart /><StockTable /></div>
         <div className="rectangle">
           <div className="button-container">
             <button className="About_us">About us</button>

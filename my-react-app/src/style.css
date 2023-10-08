@@ -13,9 +13,6 @@
     position: relative;
     width: 100%;
 }
-
-
-
 .home-page-nifty .logo-container {
     align-items: center;
     align-self: stretch;
@@ -63,8 +60,6 @@
     width: fit-content;
 }
 
-
-
 .home-page-nifty .buttons-group {
     align-items: center;
     align-self: stretch;
@@ -84,19 +79,18 @@
     flex-grow: 1;
     position: relative;
     width: 225px;
-    
 }
 
 .home-page-nifty .frame {
     background: linear-gradient(180deg, rgb(141, 169, 196) 0%, rgba(141, 169, 196, 0) 100%);
     height: 944px;
-    /* left: 0px; */
     position: absolute;
     top: 80px;
     width: 100%;
     overflow: visible;
-    
 }
+
+/* Default styles for screens larger than 768px */
 .home-page-nifty .frame .desktop-vertical {
     align-items: flex-start;
     background-color: #13315ce0;
@@ -112,6 +106,15 @@
     top: 0px;
     width: 226px;
 }
+
+/* Styles for screens 768px and below */
+@media (max-width: 768px) {
+    .home-page-nifty .frame .desktop-vertical {
+        display: none; /* Hide the sidebar */
+    }
+}
+
+
 .home-page-nifty .rectangle {
     background-color: #0b2545;
     height: 80px;
@@ -119,15 +122,13 @@
     position: absolute;
     top: 0;
     width: 100%;
-    
 }
+
 .button-container {
     white-space: nowrap;
     position: absolute;
     top: 10px;
-    
     right: 10px;
-    
 }
 
 .About_us,
@@ -141,25 +142,22 @@
     display: inline-block;
 }
 
-
 .About_us {
     margin-right: 10px;
     position: relative;
-    
-}   
+}
+
 .Search-bar {
     color: black;
     background-color: white;
     top: 50px;
 }
+
 .icons-container {
     display: flex;
-    /* Use flexbox to arrange the icons in a row */
     align-items: center;
-    /* Vertically center the icons within the container */
     position: absolute;
-   left: 50px;
-
+    left: 50px;
 }
 
 .icon-container {
@@ -169,8 +167,7 @@
     color: white;
     display: inline-block;
     margin-right: 10px;
-    /* Add some spacing between the icons */
-}   
+}
 
 .Stock-button3 {
     top: 80px;
@@ -178,55 +175,50 @@
     position: relative;
     background-color: transparent;
     color: white;
-
 }
-.Stock-button{
+
+.Stock-button {
     top: 100px;
     width: 220px;
     position: relative;
     background-color: transparent;
     color: white;
-
 }
+
 .Stock-button2 {
-     top: 120px;
+    top: 120px;
     width: 220px;
     position: relative;
     background-color: transparent;
     color: white;
-
 }
+
 .Stock-button4 {
     top: 140px;
     width: 220px;
     position: relative;
     background-color: transparent;
     color: white;
-
 }
 
 .Stock-button.white {
     background-color: #fff;
-    
     color: #000;
-    
 }
 
 .Stock-button2.white {
     background-color: #fff;
-   
     color: #000;
-    
-}  
+}
+
 .Stock-button3.white {
     background-color: #fff;
     color: #000;
-
 }
+
 .Stock-button4.white {
     background-color: #fff;
     color: #000;
-
 }
 
 .Stock-button:not(.white),
@@ -235,60 +227,26 @@
 .Stock-button4:not(.white) {
     background-color: transparent;
     color: #000000;
-    /* Change this to the desired white color */
 }
-
-
-
-.frame {
-    display: flex;
-    align-items: flex-start;
-    padding: 8px;
-}
-
-.datepickers-row {
-    display: flex;
-    align-items: flex-start;
-    margin-left: auto;
-    
-}
-
-.datepickers-row>div {
-    margin-left: 10px;
-    /* Add spacing between date pickers */
-}
-
-.datepicker,
-.datepicker2 {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    right: 0px;
-}
-
-
-.content {
-    /* flex: 1; */
-    /* Take up remaining space */
-    /* text-align: right; */
-}
-
-h1 {
-    margin-bottom: 10px;
-}
-
-
-/* body{
-    overflow: scroll;
-} */
-/* styles.css */
-
 .StatsContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;  
+    gap: 20px;
     margin-top: 90px;
     margin-left: 300px;
+}
+
+.rise1 {
+    color: green;
+    margin-right: 10px;
+}
+
+.rise2 {
+    color: red;
+    margin-right: 10px;
+}
+
+.in-boxinfo {
+    margin-left: 10px;
 }

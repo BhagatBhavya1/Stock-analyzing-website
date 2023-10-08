@@ -9,6 +9,7 @@ import Login from "./Login";
 import ExcelTable from "./ExcelTable";
 import StockDetailInfo from "./StockDetailInfo";
 import Candel_Chart from "./Candel_chart";
+import F_O from "./F&O";
 const App = () => {
   return (
     <Router>
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/GetStock" element={<ExcelTable />} />
         <Route path="/StockDetailInfo/:stock_name" element={<StockDetailInfo />} />
         <Route path="/Candel" element={<Candel_Chart />} />
+        <Route path="/F_O" element={<F_O />} />
       </Routes>
     </Router>
   );
