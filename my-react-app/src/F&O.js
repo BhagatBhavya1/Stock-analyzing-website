@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField'; 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import "./style.css";
 import "./F&O.css";
+import axios from "axios";
 // import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 
@@ -18,10 +19,15 @@ const F_O = () => {
   // const navigate = useNavigate();
   const { stock_name } = useParams();
   const [name, setName] = useState("");
+  const [FNO , setFNO] = useState([]);
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
   const[isStocksWhite,setIsStocksWhite] = useState(true);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
+  const [exp_date,setexpdate] = useState("");
+  const [ent_date,setentdate] = useState("");
+  const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
+
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -51,10 +57,47 @@ const F_O = () => {
     setIsFNOWhite(false);
     setIsNiftyWhite(false);
     setIsStocksWhite(false);
-    // navigate('/AddStock');
-
   };
-   
+  const handleExpDateChange = (event) => {
+    const newDate = event.target.value;
+    setexpdate(newDate);
+  };
+  const handleEntDateChange = (event) => {
+    const newEntDate = event.target.value;
+
+    // Check if the Enter Date is less than the Expiry Date and greater than or equal to today's date
+    if (newEntDate < exp_date && newEntDate < today) {
+      setentdate(newEntDate);
+    } else {
+      // Display an error message or handle the validation error as needed
+      alert("Invalid Enter Date. Please enter a valid date.");
+    }
+  };
+  
+  const fetchData = (enterDate, expiryDate) => {
+    // Make an Axios GET request to your API endpoint
+    axios
+      .get("http://127.0.0.1:5000/fnofetch", {
+        params: {
+          enterDate: enterDate,
+          expiryDate: expiryDate,
+        },
+      })
+      .then((response) => {
+        // Handle the API response data
+        // setFNO(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  useEffect(() => {
+    // Fetch initial data when the component mounts (you can modify this based on your needs)
+    fetchData(ent_date, exp_date);
+  }, [ent_date, exp_date]);
+
   return (
    <div className="home-page-nifty">
         <div className="div">
@@ -67,8 +110,24 @@ const F_O = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              value={exp_date} // Bind the value of the input field to the state variable
+              onChange={handleExpDateChange}
             />
-          </div>
+            <TextField
+              type="date"
+              label="Enter Date"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={ent_date} // Bind the value of the input field to the state variable
+              onChange={handleEntDateChange}
+            />
+        </div>
+        <div className="FNOTable">
+              {FNO? (<div>
+                <p>Enter a expiry date</p>
+              </div>):(<div></div>)}
+        </div>
        
     
      <div className="desktop-vertical">

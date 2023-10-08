@@ -169,6 +169,7 @@ const AddStock = () => {
               >
             Stocks
           </Button>
+          {isStocksWhite && <Navigate to="/Mainstock" />}
 
                   <Button
             className={isNiftyWhite ? 'Stock-button white' : 'Stock-button'}
@@ -186,6 +187,7 @@ const AddStock = () => {
           >
             FNO
           </Button>
+          {isFNOWhite && <Navigate to="/F_O" />}
           <Button
                   className={isAddStockWhite ? 'Stock-button4 white':'Stock-button4'} // Customize your CSS class as needed
                   variant="outlined"
@@ -194,8 +196,8 @@ const AddStock = () => {
                 >
                   Add Stock
           </Button>
-          {/* {isStocksWhite && <Navigate to="/Mainstock" />} */}
-          {isFNOWhite && <Navigate to="/F_O" />}
+          
+          {/* {isFNOWhite && <Navigate to="/F_O" />} */}
           {/* {isNiftyWhite && <Navigate to="/Mainstock" />} */}
 
                 </div>

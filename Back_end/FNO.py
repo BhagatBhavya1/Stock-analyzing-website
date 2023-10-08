@@ -1,5 +1,10 @@
 import pandas as pd
 from datetime import datetime
+from flask import Blueprint, request, jsonify
+from Connection.db_connect import dbConnect
+from bson import ObjectId
+
+Fnoget = Blueprint('fnofetch', __name__)
 
 def formate(date_str):
     
@@ -28,24 +33,26 @@ def f_o(symbol , exp_date , ent_date):
     # generate unique id for fetchnig data
     id1 = symbol + formate(ent_date) + formate(exp_date)
     # print(id1)
-
+    print(id1)
     # read csv
-    df = pd.read_excel('Copy.xlsx',sheet_name='Data')
+    df = pd.read_excel('Back_end/Copy.xlsx',sheet_name='Data')
     p =df['TIMESTAMP'].max()
     # print(p.strftime('%d-%b-%y'))
 
     #generate id 2
     id2 = symbol + formate(p.strftime('%d-%b-%y')) + formate(exp_date)
-    # print(id2)
+    print(id2)
 
     # for getting last closing price 
     index = df[df['Unique'] == id2].index[0]
+    print(index)
     result = df.at[index, 'CLOSE']
     print(f"Latest closing price = {result}")
 
     # for price change 
     # Find the values in columns K and B based on the matches
     value_k1 = df[df['Unique'] == id1].index[0]
+    print(value_k1)
     value_k2 = df[df['Unique'] == id2].index[0]
 
     price_change = (((df.at[value_k2,'CLOSE'])/(df.at[value_k1,'CLOSE']))-1)*100
@@ -57,7 +64,7 @@ def f_o(symbol , exp_date , ent_date):
 
     coi_change = (((df.at[value_c2,'COI'])/(df.at[value_c1,'COI']))-1)*100
     print(f"COI change = {coi_change}")
-
+    analysis =""
     # final analysis
     if price_change > 0 and coi_change > 0:
         analysis = "Long Builtup"
@@ -73,19 +80,25 @@ def f_o(symbol , exp_date , ent_date):
     print(f"Analysis = {analysis}")
 
 
-exp_date = '27-JUL-23'
-symbol = 'BANKNIFTY'
-ent_date = '12-JUL-23'
-f_o(symbol,exp_date,ent_date)
+@Fnoget.route('/fnofetch', methods=['GET'])
+def F_O():
+    enter_date = request.args.get('enterDate')
+    expiry_date = request.args.get('expiryDate')
+    # print(enter_date)
+    exp_date = datetime.strptime(expiry_date,'%Y-%m-%d')
+    symbol = 'BANKNIFTY'
+    ent_date = datetime.strptime(enter_date,'%Y-%m-%d')
+    # f_o(symbol,exp_date,ent_date)
+    data = {
+        "message": "Data retrieved successfully"
+    }
+    
+    return jsonify(data)
 
-
-
+# exp_date = '30-NOV-23'
+# symbol = 'BANKNIFTY'
+# # ent_date = datetime.now()
+# ent_date = '5-OCT-23'
+# print(ent_date)
+# f_o(symbol,exp_date,ent_date)
 #  mask = df['Unique'] == id
-
-#     # Locate the row(s) where the ID is found
-#     if mask.any():
-#         rows_with_id = df[mask]
-#         print("Row(s) where the ID is found:")
-#         print(rows_with_id)
-#     else:
-#         print(f"ID '{id}' not found in the DataFrame.")
