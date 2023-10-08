@@ -9,25 +9,21 @@ import ExcelTable from './ExcelTable';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import "./style.css";
-import "./F&O.css";
+import "./Analysis.css";
 import axios from "axios";
 // import StockDetailInfo from "./StockDetailInfo"
 import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNavigate } from 'react-router-dom'; 
 
 
-const F_O = () => {
+const Analysis = () => {
   // const navigate = useNavigate();
-  const { stock_name } = useParams();
   const [name, setName] = useState("");
-  const [FNO , setFNO] = useState([]);
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
   const[isStocksWhite,setIsStocksWhite] = useState(true);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
-  const [exp_date,setexpdate] = useState("");
-  const [ent_date,setentdate] = useState("");
-  const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
-
+  const [selectedItem, setSelectedItem] = useState('');
+  const [analysis,setanalysis] = useState([]);
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -58,34 +54,20 @@ const F_O = () => {
     setIsNiftyWhite(false);
     setIsStocksWhite(false);
   };
-  const handleExpDateChange = (event) => {
-    const newDate = event.target.value;
-    setexpdate(newDate);
-  };
-  const handleEntDateChange = (event) => {
-    const newEntDate = event.target.value;
 
-    // Check if the Enter Date is less than the Expiry Date and greater than or equal to today's date
-    if (newEntDate < exp_date && newEntDate < today) {
-      setentdate(newEntDate);
-    } else {
-      // Display an error message or handle the validation error as needed
-      alert("Invalid Enter Date. Please enter a valid date.");
-    }
-  };
   
-  const fetchData = (enterDate, expiryDate) => {
+  const fetchData = (selectedItem) => {
+    console.log(selectedItem);
     // Make an Axios GET request to your API endpoint
     axios
-      .get("http://127.0.0.1:5000/fnofetch", {
+      .get("http://127.0.0.1:5000/get_analysis", {
         params: {
-          enterDate: enterDate,
-          expiryDate: expiryDate,
+          stock_symbol:selectedItem,
         },
       })
       .then((response) => {
         // Handle the API response data
-        setFNO(response.data);
+        setanalysis(response.data);
         console.log(response.data);
       })
       .catch((error) => {
@@ -95,70 +77,66 @@ const F_O = () => {
 
   useEffect(() => {
     // Fetch initial data when the component mounts (you can modify this based on your needs)
-    fetchData(ent_date, exp_date);
-  }, [ent_date, exp_date]);
+    fetchData(selectedItem);
+    // console.log(selectedItem);
+  }, [selectedItem]);
+
+  const dropdownItems = [
+    { id: 'RELIANCE.NS', name: 'RELIANCE' },
+    { id: 'LICI.NS', name: 'LIC' },
+    { id: 'HDFCBANK.NS', name: 'HDFC' },
+  ];
+  
+  const handleItemClick = (itemKey) => {
+    console.log(itemKey);
+    setSelectedItem(itemKey);
+  }
+  const columns = ["Index", "above", "conf", "t1", "t2", "t3", "t4", "t5", "t6"];
 
   return (
    <div className="home-page-nifty">
         <div className="div">
         <div className="frame">
-        {/* code goes over here */}
-        <div className="date-input">
-            <TextField
-              type="date"
-              label="Expiry Date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={exp_date} // Bind the value of the input field to the state variable
-              onChange={handleExpDateChange}
-            />
-            <TextField
-              type="date"
-              label="Enter Date"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={ent_date} // Bind the value of the input field to the state variable
-              onChange={handleEntDateChange}
-            />
-        </div>
-        <div className="FNOTable">
-              {FNO? (<div>
-                <p>Enter a expiry date</p>
-              </div>):(<div>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Stock Symbol</th>
-                      <th>Latest Closing Price</th>
-                      <th>Price Change</th>
-                      <th>COI Change</th>
-                      <th>Analysis</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(FNO).map(([symbol, data]) => (
-                      <tr key={symbol}>
-                        <td>{symbol}</td>
-                        <td>{data['Latest closing price']}</td>
-                        <td>{data['PRICE change']}</td>
-                        <td>{data['COI change']}</td>
-                        <td>{data['Analysis']}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>)}
-        </div>
+        <div className="stock">
+      <select onChange={(e) => handleItemClick(e.target.value)}>
+        <option value="">Select an item</option>
+        {dropdownItems.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.name}
+          </option>
+        ))}
+      </select>
+      {selectedItem && <p>Selected Item: {selectedItem}</p>}
+      
+      <table>
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={column}>{column}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(analysis).map((rowName) => (
+            <tr key={rowName}>
+              <td>{rowName}</td>
+              {columns.slice(1).map((column) => (
+                <td key={column}>{analysis[rowName][column]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      
+
+    </div>
        
-    
      <div className="desktop-vertical">
           <div className="logo-container">
             <div className="logo">
               {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
               <div className="text">
-                <h1 className="webby-frames">Bhavay Universal</h1>
+                <h1 className="webby-frames">Kaizen Universal</h1>
                 <div className="for-figma" />
               </div>
             </div>
@@ -237,4 +215,4 @@ const F_O = () => {
   );
 };
 
-export default F_O;
+export default Analysis;
