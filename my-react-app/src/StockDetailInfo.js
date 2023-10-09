@@ -78,13 +78,13 @@ const StockDetailInfo = () => {
           <div className="scrollable-table">
           <div className="Candel-chart">
               {/* Place your candlestick chart component here */}
-              <Candel_Chart />
+              <Candel_Chart stock_name={stock_name}/>
           </div>
 
           <div className="table-container">
             {/* Place your table component here */}
             
-              <StockTable />
+              <StockTable stock_name={stock_name} />
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ const StockDetailInfo = () => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Nifty
+        Stock ANalysis
       </Button>
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}

@@ -188,7 +188,7 @@ const Analysis = () => {
         startIcon={<Home />}
         onClick={handleFNClick}
       >
-        FNO
+        Stock ANalysis
       </Button>
       <Button
               className={isAddStockWhite ? 'Stock-button4 white':'Stock-button4'} // Customize your CSS class as needed

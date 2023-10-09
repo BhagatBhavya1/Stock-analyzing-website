@@ -27,7 +27,7 @@ const F_O = () => {
   const [exp_date,setexpdate] = useState("");
   const [ent_date,setentdate] = useState("");
   const today = new Date().toISOString().slice(0, 10); // Get today's date in YYYY-MM-DD format
-
+  const columns = ["Stock_name","Latest closing price", "PRICE change", "COI change","Analysis"];
   // const navigate = useNavigate();
   const handleProfileClick = () => {
     // Add your logic for what should happen when the profile icon is clicked
@@ -124,32 +124,25 @@ const F_O = () => {
             />
         </div>
         <div className="FNOTable">
-              {FNO? (<div>
-                <p>Enter a expiry date</p>
-              </div>):(<div>
                 <table>
-                  <thead>
-                    <tr>
-                      <th>Stock Symbol</th>
-                      <th>Latest Closing Price</th>
-                      <th>Price Change</th>
-                      <th>COI Change</th>
-                      <th>Analysis</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(FNO).map(([symbol, data]) => (
-                      <tr key={symbol}>
-                        <td>{symbol}</td>
-                        <td>{data['Latest closing price']}</td>
-                        <td>{data['PRICE change']}</td>
-                        <td>{data['COI change']}</td>
-                        <td>{data['Analysis']}</td>
-                      </tr>
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th key={column}>{column}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(FNO).map((rowName) => (
+                  <tr key={rowName}>
+                    <td>{rowName}</td>
+                    {columns.slice(1).map((column) => (
+                      <td key={column}>{FNO[rowName][column]}</td>
                     ))}
-                  </tbody>
-                </table>
-              </div>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
         </div>
        
     
@@ -202,7 +195,7 @@ const F_O = () => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Nifty
+        Stock ANalysis
       </Button>
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}

@@ -132,7 +132,7 @@ const AddStock = () => {
                 <div className="logo">
                   {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
                   <div className="text">
-                    <h1 className="webby-frames">Bizan Universal</h1>
+                    <h1 className="webby-frames">Kaizan Universal</h1>
                     <div className="for-figma" />
                   </div>
                 </div>
@@ -177,15 +177,16 @@ const AddStock = () => {
             startIcon={<Home />}
             onClick={handleNiftyClick}
           >
-            Nifty
+            Main Stock
           </Button>
+          {isStocksWhite && <Navigate to="/Mainstock" />}
           <Button
             className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}
             variant="outlined"
             startIcon={<Home />}
             onClick={handleFNClick}
           >
-            FNO
+          FNO
           </Button>
           {isFNOWhite && <Navigate to="/F_O" />}
           <Button

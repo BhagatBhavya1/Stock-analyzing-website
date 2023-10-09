@@ -13,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import ExcelTable from './ExcelTable';
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
-import { IoMdTrendingDown, IoMdTrendingUp } from 'react-icons/io';
 import StatsCard from "./StatsCard";
 // import {Routes, Route, useNavigate} from 'react-router-dom';
 // import { FaUsers, FaDollarSign, FaChartLine } from 'react-icons';
@@ -154,8 +153,9 @@ const MainStock = ({}) => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Nifty
+        Stock ANalysis
       </Button>
+      {isAddStockWhite && <Navigate to="/Analysis" />}
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}
         variant="outlined"
@@ -164,6 +164,7 @@ const MainStock = ({}) => {
       >
         FNO
       </Button>
+      {isAddStockWhite && <Navigate to="/F_O" />}
       <Button
               className={isAddStockWhite ? 'Stock-button4 white':'Stock-button4'} // Customize your CSS class as needed
               variant="outlined"

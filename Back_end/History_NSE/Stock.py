@@ -5,7 +5,7 @@ import datetime
 import logging
 from History_NSE.Scrapee import scrape_data
 # import Scrapee  as s
-from flask import Blueprint,jsonify
+from flask import Blueprint,jsonify, request
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s:%(message)s')
 pd.options.mode.chained_assignment = None
 
@@ -25,7 +25,9 @@ def parse_date(text):
 
 Stock_get = Blueprint('get_data', __name__)
 @Stock_get.route('/get_data', methods=['GET'])
-def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2020', end_date='1-10-2020'):
+def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2023', end_date='1-10-2023'):
+    # stock_symbol = request.args.get('stock_symbol[stock_name]')
+    # print(stock_symbol)
     stock_symbol = stock_symbol.replace('&', '%26')
 
     if full_data is True:

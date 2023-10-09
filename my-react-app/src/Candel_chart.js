@@ -3,12 +3,16 @@ import axios from 'axios';
 import "./StockTable.css";
 // import { Candlestick  } from "react-chartjs-2";
 import { Chart } from "react-google-charts";
-const Candel_Chart = () => {
+const Candel_Chart = (stock_name) => {
   const [stocktableData, setstocktableData] = useState([]);
 
   useEffect(() => {
     // Make an Axios GET request to your Express.js API endpoint
-    axios.get('http://127.0.0.1:5000/get_data') // Replace with your API endpoint
+    axios.get('http://127.0.0.1:5000/get_data', {
+      params: {
+        stock_symbol: stock_name,
+      },
+    }) // Replace with your API endpoint
       .then((response) => {
         console.log("candel");
         console.log(response.data);
