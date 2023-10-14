@@ -25,10 +25,14 @@ def parse_date(text):
 
 Stock_get = Blueprint('get_data', __name__)
 @Stock_get.route('/get_data', methods=['GET'])
-def get_data(stock_symbol="RELIANCE", full_data=False, start_date='15-9-2023', end_date='1-10-2023'):
-    # stock_symbol = request.args.get('stock_symbol[stock_name]')
-    # print(stock_symbol)
+def get_data():
+    stock_symbol = request.args.get('stock_symbol[stock_name]', 'HDFCBANK')
+    full_data = request.args.get('full_data', type=bool, default=False)
+    start_date = request.args.get('start_date', '15-9-2023')
+    end_date = request.args.get('end_date', '1-10-2023')
+
     stock_symbol = stock_symbol.replace('&', '%26')
+
 
     if full_data is True:
         parsed_start_date = datetime.datetime.strptime('1-1-1992', "%d-%m-%Y")
