@@ -2,22 +2,37 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Home_Page from "./Home_Page";
 import MainStock from "./MainStock";
-import { BrowserRouter as Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';   
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate(); 
+  const handleLogin =async () => {
+    // // Static email and password for demonstration purposes
+    // const staticEmail = 'user@gmail.com';
+    // const staticPassword = 'password';
 
-  const handleLogin = () => {
-    // Static email and password for demonstration purposes
-    const staticEmail = 'user@gmail.com';
-    const staticPassword = 'password';
+    // if (email === staticEmail && password === staticPassword) {
+    //   setLoggedIn(true);
+    // } else {
+    //   alert('Invalid email or password');
+    // }
+     // Send a POST request to your Python backend with email and password
+     
+     const response = await fetch('http://127.0.0.1:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-    if (email === staticEmail && password === staticPassword) {
+    if (response.ok) {
+      // Handle successful login
+      navigate('/Mainstock'); // Redirect to the mainstock page
       setLoggedIn(true);
-    } else {
-      alert('Invalid email or password');
     }
   };
 
