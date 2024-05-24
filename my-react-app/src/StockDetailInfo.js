@@ -114,15 +114,6 @@ const StockDetailInfo = () => {
          
           </div>
 
-          
-            <TextField className="Search-bar"
-              value={name}
-              label="Search for stock"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-
-            /> 
             <div>
             <Button
         className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
@@ -139,8 +130,9 @@ const StockDetailInfo = () => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Stock ANalysis
+       ANalysis
       </Button>
+      {isNiftyWhite && <Navigate to="/Analysis" />}
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}
         variant="outlined"
@@ -149,6 +141,7 @@ const StockDetailInfo = () => {
       >
         FNO
       </Button>
+      {isFNOWhite && <Navigate to="/F_O" />}
       <Button
               className={isAddStockWhite ? 'Stock-button4 white':'Stock-button4'} // Customize your CSS class as needed
               variant="outlined"

@@ -109,7 +109,7 @@ const MainStock = ({}) => {
             <div className="logo">
               {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
               <div className="text">
-                <h1 className="webby-frames">Kizen Universal</h1>
+                <h1 className="webby-frames">Kaizen Universal</h1>
                 <div className="for-figma" />
               </div>
             </div>
@@ -128,15 +128,7 @@ const MainStock = ({}) => {
          
           </div>
 
-          
-            <TextField className="Search-bar"
-              value={name}
-              label="Search for stock"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
 
-            /> 
             <div>
             <Button
         className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
@@ -153,9 +145,9 @@ const MainStock = ({}) => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Stock ANalysis
+        Analysis
       </Button>
-      {isAddStockWhite && <Navigate to="/Analysis" />}
+      {isNiftyWhite && <Navigate to="/Analysis" />}
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}
         variant="outlined"

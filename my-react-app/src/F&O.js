@@ -21,8 +21,8 @@ const F_O = () => {
   const [name, setName] = useState("");
   const [FNO , setFNO] = useState([]);
   const [isNiftyWhite, setIsNiftyWhite] = useState(false);
-  const [isFNOWhite, setIsFNOWhite] = useState(false);
-  const[isStocksWhite,setIsStocksWhite] = useState(true);
+  const [isFNOWhite, setIsFNOWhite] = useState(true);
+  const[isStocksWhite,setIsStocksWhite] = useState(false);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
   const [exp_date,setexpdate] = useState("");
   const [ent_date,setentdate] = useState("");
@@ -151,7 +151,7 @@ const F_O = () => {
             <div className="logo">
               {/* <img className="icon-container" alt="Icon container" src="icon-container.svg" /> */}
               <div className="text">
-                <h1 className="webby-frames">Bhavay Universal</h1>
+                <h1 className="webby-frames">Kaizen Universal</h1>
                 <div className="for-figma" />
               </div>
             </div>
@@ -170,15 +170,6 @@ const F_O = () => {
          
           </div>
 
-          
-            <TextField className="Search-bar"
-              value={name}
-              label="Search for stock"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-
-            /> 
             <div>
             <Button
         className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
@@ -195,7 +186,7 @@ const F_O = () => {
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Stock ANalysis
+      ANalysis
       </Button>
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}

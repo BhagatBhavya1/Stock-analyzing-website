@@ -37,7 +37,7 @@ def f_o(symbol , exp_date , ent_date):
     # print(id1)
     # print(id1)
     # read csv
-    df = pd.read_excel('Back_end/Copy.xlsx',sheet_name='Data')
+    df = pd.read_excel('./Copy.xlsx',sheet_name='Data')
     p =df['TIMESTAMP'].max()
     # print(p.strftime('%d-%b-%y'))
 

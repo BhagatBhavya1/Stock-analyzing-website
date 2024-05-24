@@ -23,38 +23,11 @@ def calculate_vf_table(df, test1=0):
     return df , range , close[-1]
 
 
-
-# Define the stock symbol and date range
-# stock_symbol = "^NSEI"  # Replace with your desired stock symbol
-# end_date = datetime.now()
-# # print(end_date)
-# start_date = end_date - timedelta(days=17) 
-
-# # Fetch historical data for the specified date range
-# data = yf.download(stock_symbol, start=start_date, end=end_date)
-
-# df = pd.DataFrame(data)
-# print(df)
-
-# df1 , range , dokdc = calculate_vf_table(df, test1=0)
-# table = {
-#     'above':[round(dokdc + (range * 0.236),2) , round(dokdc - (range * 0.236), 2)],
-#     'conf':[round(dokdc + (range * 0.382),2) , round(dokdc - (range * 0.382), 2)],
-#     't1':[round(dokdc + (range * 0.5),2),round(dokdc - (range * 0.5), 2)],
-#     't2':[round(dokdc + (range * 0.618),2),round(dokdc - (range * 0.618), 2)],
-#     't3':[round(dokdc + (range * 0.786),2),round(dokdc - (range * 0.786), 2)],
-#     't4':[round(dokdc + (range * 0.888),2),round(dokdc - (range * 0.888), 2)],
-#     't5':[round(dokdc + (range * 1.236),2),round(dokdc - (range * 1.236), 2)],
-#     't6':[round(dokdc + (range * 1.618),2),round(dokdc - (range * 1.618), 2)],
-# }
-
-# ans = pd.DataFrame(table)
-# ans.index = ['Buy above' , 'Sell below']
-# print(ans)
 @Analysis.route('/get_analysis', methods=['GET'])
 def get_analysis():
-    stock_symbol = request.args.get('stock_symbol')
-    end_date = datetime.now()
+    stock_symbol ='JIOFIN.NS'
+    end_date = datetime.now()- timedelta(days=1)
+
     # print(end_date)
     start_date = end_date - timedelta(days=17) 
 
@@ -82,3 +55,4 @@ def get_analysis():
     json_data = ans.to_json(orient='index')
     print(json_data)
     return json_data
+get_analysis()

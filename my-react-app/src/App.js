@@ -11,6 +11,7 @@ import StockDetailInfo from "./StockDetailInfo";
 import Candel_Chart from "./Candel_chart";
 import F_O from "./F&O";
 import Analysis from "./Analysis";
+import LiveDataComponent from "./livestock"
 const App = () => {
   return (
     <Router>
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/Candel" element={<Candel_Chart />} />
         <Route path="/F_O" element={<F_O />} />
         <Route path="/Analysis" element={<Analysis />} />
+        <Route path="/live" element={<LiveDataComponent />} />
       </Routes>
     </Router>
   );

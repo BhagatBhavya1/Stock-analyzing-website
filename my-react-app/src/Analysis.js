@@ -18,9 +18,9 @@ import { BrowserRouter as Router,useParams, Route, Routes, Link, Navigate, useNa
 const Analysis = () => {
   // const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [isNiftyWhite, setIsNiftyWhite] = useState(false);
+  const [isNiftyWhite, setIsNiftyWhite] = useState(true);
   const [isFNOWhite, setIsFNOWhite] = useState(false);
-  const[isStocksWhite,setIsStocksWhite] = useState(true);
+  const[isStocksWhite,setIsStocksWhite] = useState(false);
   const [isAddStockWhite, setIsAddStockWhite] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
   const [analysis,setanalysis] = useState([]);
@@ -155,15 +155,6 @@ const Analysis = () => {
          
           </div>
 
-          
-            <TextField className="Search-bar"
-              value={name}
-              label="Search for stock"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-
-            /> 
             <div>
             <Button
         className={isStocksWhite ? 'Stock-button3 white' : 'Stock-button3'}
@@ -173,14 +164,14 @@ const Analysis = () => {
       >
         Stocks
       </Button>
-
+      {isStocksWhite && <Navigate to="/Analysis" />}
               <Button
         className={isNiftyWhite ? 'Stock-button white' : 'Stock-button'}
         variant="outlined"
         startIcon={<Home />}
         onClick={handleNiftyClick}
       >
-        Nifty
+      ANALYSIS
       </Button>
       <Button
         className={isFNOWhite ? 'Stock-button2 white' : 'Stock-button2'}
@@ -188,8 +179,9 @@ const Analysis = () => {
         startIcon={<Home />}
         onClick={handleFNClick}
       >
-        Stock ANalysis
+        FNO
       </Button>
+      {isFNOWhite && <Navigate to="/F_O" />}
       <Button
               className={isAddStockWhite ? 'Stock-button4 white':'Stock-button4'} // Customize your CSS class as needed
               variant="outlined"

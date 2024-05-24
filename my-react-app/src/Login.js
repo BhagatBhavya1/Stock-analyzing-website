@@ -52,13 +52,13 @@ const Login = () => {
           <div className="box">
             <Helmet>
               <meta charSet="utf-8" />
-              <title>Kizan Universal</title>
+              <title>Kaizen Universal</title>
               <link rel="canonical" href="http://localhost:3000/" />
             </Helmet>
           <div className="login-wrapper">
             <div className="login">
               <div className="overlap">
-                <h1 className="text-wrapper">Kizan Universal</h1>
+                <h1 className="text-wrapper">Kaizen Universal</h1>
                 <div className="rectangle" />
 
               </div>
